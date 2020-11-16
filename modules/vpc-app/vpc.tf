@@ -1,5 +1,9 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = var.region_name
+}
+
+variable "region_name" {
+  description = "region name"
 }
 
 
@@ -93,6 +97,10 @@ resource "aws_default_route_table" "r" {
   }
 }
 
-output "custom_vpc" {
+output "custom_app_vpc" {
   value = aws_vpc.ey_vpc
+}
+
+output "custom_app_main_route" {
+  value = aws_default_route_table.r
 }

@@ -1,5 +1,9 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = var.region_name
+}
+
+variable "region_name" {
+  description = "region name"
 }
 
 resource "random_string" "random" {
@@ -7,8 +11,6 @@ resource "random_string" "random" {
   special = false
   lower   = true
 }
-
-
 
 variable "key_name" {
   default = "bastion-key"
@@ -49,8 +51,8 @@ data "aws_ami" "ubuntu" {
   }
 
   filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name   = "architecture"
+    values = ["x86_64"]
   }
 }
 
