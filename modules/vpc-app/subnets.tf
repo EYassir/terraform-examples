@@ -41,3 +41,7 @@ resource "aws_route_table_association" "ey_a" {
 output "public_subnet" {
   value = aws_subnet.public_01
 }
+
+output "public_app_vpc_route" {
+  value = aws_route_table.ey_public_route
+}

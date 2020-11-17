@@ -99,3 +99,7 @@ output "custom_db_vpc" {
 output "custom_database_main_route" {
   value = aws_default_route_table.r
 }
+
+output "custom_database_vpc" {
+  value = aws_vpc.ey_db_vpc
+}
