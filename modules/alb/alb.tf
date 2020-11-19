@@ -9,6 +9,8 @@ resource "aws_lb" "tf_lb_wp" {
   subnets            = [aws_subnet.public_01.id, aws_subnet.public_02.id, aws_subnet.public_03.id] #data.aws_subnet_ids.custom_vpc_subnets_ids.ids
   security_groups    = [aws_security_group.tf_alb_worpress_http.id]
 
+
+
   tags = {
     Name = "ey-lb-wordpress"
   }

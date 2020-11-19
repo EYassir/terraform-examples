@@ -36,3 +36,5 @@ variable "db_password" {
   default = "admin2020"
 }
 #END RDS : Variables
+
+

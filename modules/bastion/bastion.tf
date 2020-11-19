@@ -37,22 +37,11 @@ resource "aws_key_pair" "my_awsome_keypair" {
 }
 
 data "aws_ami" "ubuntu" {
-  owners      = ["amazon"]
+  owners      = ["099720109477"]
   most_recent = true
-
   filter {
     name   = "name"
-    values = ["Cloud9Ubuntu-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-*"]
   }
 }
 
