@@ -19,7 +19,7 @@ variable "vpc_app" {
 }
 
 variable "vpc_database" {
-  description = "The database VPC"
+  description = "The Database VPC"
   default = {
     "name" : "database"
     "cidr" : "12.0.0.0/16",
