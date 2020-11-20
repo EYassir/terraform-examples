@@ -7,60 +7,35 @@
 #     encrypt        = true
 #   }
 # }
-module "vpc_module" {
-  source      = "../../modules/vpc-app"
-  vpc_cidr    = var.vpc_cidr
+module "vpc_app_module" {
+  source      = "../../modules/vpc"
+  vpc_object  = var.vpc_app
+  region_name = var.region_name
+}
+
+module "vpc_database_module" {
+  source      = "../../modules/vpc"
+  vpc_object  = var.vpc_database
   region_name = var.region_name
 }
 
 module "bastion_module" {
   source           = "../../modules/bastion"
-  custom_subnet_id = module.vpc_module.public_subnet.id
-  custom_vpc_id    = module.vpc_module.custom_app_vpc.id
+  custom_subnet_id = module.vpc_app_module.custom_vpc_public_subnets[0].id
+  custom_vpc_id    = module.vpc_app_module.custom_vpc.id
   region_name      = var.region_name
+  key_name         = var.key_name
+  key_value        = var.key_value
 }
 
-module "vpc_database_module" {
-  source      = "../../modules/vpc-db"
-  vpc_cidr    = "30.0.0.0/16"
-  region_name = var.region_name
-}
-
-module "vpc_peering" {
+module "vpc_peering_app_database" {
   source        = "../../modules/peering"
-  vpc_requester = module.vpc_module.custom_app_vpc.id
-  vpc_accepter  = module.vpc_database_module.custom_db_vpc.id
+  vpc_requester = module.vpc_app_module.custom_vpc.id
+  vpc_accepter  = module.vpc_database_module.custom_vpc.id
   region_name   = var.region_name
-  route_a       = module.vpc_module.custom_app_main_route
-  route_b       = module.vpc_database_module.custom_database_main_route
-  cidr_vpc_a    = "11.0.0.0/16" #var.vpc_cidr
-  cidr_vpc_b    = "30.0.0.0/16"
-}
-
-module "asg_ansible" {
-  source      = "../../modules/asg"
-  key_name    = "ansible-demo-keypair"
-  key_value   = var.key_value
-  region_name = var.region_name
-  vpc_id      = module.vpc_module.custom_app_vpc.id
-}
-
-module "alb_ansible" {
-  source           = "../../modules/alb"
-  region_name      = var.region_name
-  vpc_id           = module.vpc_module.custom_app_vpc.id
-  target_group     = module.asg_ansible.asg_taget_group
-  vpc_public_route = module.vpc_module.public_app_vpc_route
-}
-
-module "mysql_rds" {
-  source           = "../../modules/rds"
-  region_name      = var.region_name
-  vpc_id           = module.vpc_database_module.custom_database_vpc.id
-  db_password      = var.db_password
-  admin_user       = var.admin_user
-  db_name          = var.db_name
-  db_instance_type = var.db_instance_type
-  db_storage       = var.db_storage
+  route_a_id    = module.vpc_app_module.custom_vpc.default_route_table_id
+  route_b_id    = module.vpc_database_module.custom_vpc.default_route_table_id
+  cidr_vpc_a    = var.vpc_app["cidr"]
+  cidr_vpc_b    = var.vpc_database["cidr"]
 }
 

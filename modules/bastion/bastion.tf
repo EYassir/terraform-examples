@@ -12,13 +12,6 @@ resource "random_string" "random" {
   lower   = true
 }
 
-variable "key_name" {
-  default = "bastion-key"
-}
-
-variable "custom_subnet_id" {
-  description = "The custom public subnet"
-}
 
 resource "aws_instance" "ey_bastion" {
   ami                    = data.aws_ami.ubuntu.id
@@ -33,7 +26,7 @@ resource "aws_instance" "ey_bastion" {
 
 resource "aws_key_pair" "my_awsome_keypair" {
   key_name   = var.key_name
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAa8s/HyEapMVRbF6i2y0eq433G+lkCNUoSicGiTlVZK6jj2D6nkeApyjMvO+b9d68Gr8sokh/sOiE91suZm33ZN0u1Fho9kbkI5tZmi6yJJlcbha7/Yjg6Hb8ZptV8f6TqML0JkIMp50Z1itE1UPThUzcVyJ5AM2J47k0LseYC640BEzjlJOd45I5LCA7ew7sBmYLzP+yb5Z3EkxvADCQwtlWfnO1goMwnqnG5Zkmt3fKdzCmQ6Ig4Vu54XzbqeHoSyuVp7xRdPq/BO3XnrrWIjBff9amyOajKVzq6XkvEfOp5n8O0Y5X+RiHrPxWDvkGPi27P5IQmiXCCPCUc7dN yassir@ubuntu"
+  public_key = var.key_value
 }
 
 data "aws_ami" "ubuntu" {
@@ -69,10 +62,4 @@ resource "aws_security_group" "ey_bastion_terraform" {
 
 }
 
-variable "custom_vpc_id" {
-  description = "The vpc id"
-}
 
-output "bastion" {
-  value = aws_instance.ey_bastion
-}

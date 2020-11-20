@@ -2,24 +2,14 @@ provider "aws" {
   region = var.region_name
 }
 
-variable "region_name" {
-  description = "region name"
-}
-
-
-variable "vpc_cidr" {
-  description = "The vpc CIDR"
-}
-
-
-resource "aws_vpc" "ey_db_vpc" {
-  cidr_block           = var.vpc_cidr
+resource "aws_vpc" "ey_vpc" {
+  cidr_block           = var.vpc_object["cidr"]
   instance_tenancy     = "default"
   enable_dns_support   = true
   enable_dns_hostnames = true
 
   tags = {
-    Name = "eyassir-database-terraform"
+    Name = "eyassir-${var.vpc_object["name"]}-terraform"
   }
 }
 
@@ -27,16 +17,15 @@ resource "aws_vpc_dhcp_options" "dns_options" {
   domain_name_servers = ["8.8.8.8", "8.8.4.4"]
 }
 
-
 resource "aws_vpc_dhcp_options_association" "dns_resolver" {
-  vpc_id          = aws_vpc.ey_db_vpc.id
+  vpc_id          = aws_vpc.ey_vpc.id
   dhcp_options_id = aws_vpc_dhcp_options.dns_options.id
 }
 
-resource "aws_security_group" "ey_db_vpc_default_sg" {
-  name        = "ey_db_vpc_default_sg"
+resource "aws_security_group" "ey_vpc_default_sg" {
+  name        = "ey_vpc_${var.vpc_object["name"]}_default_sg"
   description = "Allow ALL inbound traffic"
-  vpc_id      = aws_vpc.ey_db_vpc.id
+  vpc_id      = aws_vpc.ey_vpc.id
 
   ingress {
     description = "Allow all Traffic"
@@ -54,12 +43,12 @@ resource "aws_security_group" "ey_db_vpc_default_sg" {
   }
 
   tags = {
-    Name = "ey-vpc-database-sg"
+    Name = "ey-vpc-default-sg"
   }
 }
 
 resource "aws_network_acl" "ey_default_acl" {
-  vpc_id = aws_vpc.ey_db_vpc.id
+  vpc_id = aws_vpc.ey_vpc.id
 
   egress {
     protocol   = "tcp"
@@ -80,26 +69,6 @@ resource "aws_network_acl" "ey_default_acl" {
   }
 
   tags = {
-    Name = "ey_database_acl"
+    Name = "ey_${var.vpc_object["name"]}_default_acl"
   }
-}
-
-resource "aws_default_route_table" "r" {
-  default_route_table_id = aws_vpc.ey_db_vpc.default_route_table_id
-
-  tags = {
-    Name = "ey-database-private-route"
-  }
-}
-
-output "custom_db_vpc" {
-  value = aws_vpc.ey_db_vpc
-}
-
-output "custom_database_main_route" {
-  value = aws_default_route_table.r
-}
-
-output "custom_database_vpc" {
-  value = aws_vpc.ey_db_vpc
 }
