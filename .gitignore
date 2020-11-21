@@ -1,4 +1,5 @@
-env/dev/.terraform
-env/dev/*.tfstate*
+.*
+infra/env/dev/.terraform
+infra/env/dev/*.tfstate*
 *.tfstate*
-modules/bastion/keys/*
+infra/modules/bastion/keys/*
