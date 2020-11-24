@@ -74,7 +74,7 @@ resource "aws_iam_instance_profile" "cwagtn_profile" {
 
 #Create lanch configuration
 resource "aws_launch_configuration" "tf_ansible_fitec" {
-  name                 = "tf_ansible_fitec__${random_string.random.result}"
+  #name                 = "tf_ansible_fitec__${random_string.random.result}"
   image_id             = data.aws_ami.ubuntu.id
   instance_type        = "t2.micro"
   security_groups      = [aws_security_group.tf_allow_worpress_http.id]
