@@ -24,7 +24,8 @@ resource "aws_iam_policy" "cwagent_policy" {
         {
             "Sid": "VisualEditor0",
             "Effect": "Allow",
-            "Action": "logs:*",
+            "Action": ["logs:*",
+                         "s3:*"],
             "Resource": "*"
         }
     ]
