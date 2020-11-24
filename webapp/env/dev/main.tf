@@ -1,12 +1,12 @@
-# terraform {
-#   backend "s3" {
-#     bucket         = "terraform-fitec-example-bucket-state"
-#     key            = "env/dev/terraform.tfstate"
-#     region         = "eu-west-1"
-#     dynamodb_table = "terraform-fitec-example-dynamodb-lock"
-#     encrypt        = true
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket         = "terraform-fitec-example-bucket-state"
+    key            = "env/dev/terraform.tfstate"
+    region         = "eu-west-1"
+    dynamodb_table = "terraform-fitec-example-dynamodb-lock"
+    encrypt        = true
+  }
+}
 
 provider "aws" {
   region = var.region_name
