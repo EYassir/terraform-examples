@@ -36,7 +36,7 @@ variable "vpc_database" {
 
 #START : BASTION PARAMS
 variable "key_value" {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAa8s/HyEapMVRbF6i2y0eq433G+lkCNUoSicGiTlVZK6jj2D6nkeApyjMvO+b9d68Gr8sokh/sOiE91suZm33ZN0u1Fho9kbkI5tZmi6yJJlcbha7/Yjg6Hb8ZptV8f6TqML0JkIMp50Z1itE1UPThUzcVyJ5AM2J47k0LseYC640BEzjlJOd45I5LCA7ew7sBmYLzP+yb5Z3EkxvADCQwtlWfnO1goMwnqnG5Zkmt3fKdzCmQ6Ig4Vu54XzbqeHoSyuVp7xRdPq/BO3XnrrWIjBff9amyOajKVzq6XkvEfOp5n8O0Y5X+RiHrPxWDvkGPi27P5IQmiXCCPCUc7dN yassir@ubuntu"
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/CvgQztRy9exBDG1furKTDapPWsQyftLv+ZnITRhNNAfbqbNdW5o98hA0FWKXT6Lck9I/OUpDYW77dHKfQ0M1g0g+iL+7a1OY67YBGDmwgyYcq5igq/JcpaXs6ysAijiwHLBvHqpq/UswNmAqvfxRp9jL79ui81d9fUd6YLuzdBA34VPad6Tog9rLEb0apwEE1668aAdhN8JbuIz6lVkf8OB2hmDEX0pliZOrFicfkkDfQIXiLVpds26fYU2QD6KWrSpqVD0TLKwlDSx9ZdYAq+jAEcq2RHlDnt9hlUf1zA3wPLQG2LiFYqi+ttuEsU/m30r8aiGsFHxCQlYRHe45 yassir@ubuntu"
 }
 variable "key_name" {
   description = "The name of the keypair"

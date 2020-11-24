@@ -26,6 +26,6 @@ data "aws_subnet_ids" "database_vpc_subnets_ids" {
   vpc_id = data.aws_vpc.database_vpc.id
   filter {
     name   = "tag:Name"
-    values = ["eyassir-private-database-*"]
+    values = ["*-private-*"]
   }
 }

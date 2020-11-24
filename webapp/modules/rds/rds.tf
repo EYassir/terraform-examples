@@ -1,5 +1,5 @@
 resource "aws_db_subnet_group" "rds_custom_subnet" {
-  name       = "main"
+  name       = "${var.db_name}-subnet-group"
   subnet_ids = data.aws_subnet_ids.database_vpc_subnets_ids.ids
   tags = {
     Name = "ey-db-subnet-group"

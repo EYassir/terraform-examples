@@ -29,4 +29,3 @@ variable "app_port" {
 variable "target_group" {
   description = "arn of target"
 }
-
