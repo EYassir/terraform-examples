@@ -4,10 +4,10 @@ variable "region_name" {
 }
 
 variable "app_vpc_id" {
-  default = ""
+  default = "vpc-08d925842e27f96a4"
 }
 variable "database_vpc_id" {
-  default = ""
+  default = "vpc-03e28602edd552ef8"
 }
 
 #START :  ASG PARAMS
@@ -16,7 +16,7 @@ variable "key_name" {
   default     = "ansible-keypair"
 }
 variable "key_value" {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpPriXUOy0eFzDLVa2Hh1ftjdplazUcnZw0scT1yxu20qP3j/WBjnFtMJim/E2aKxZApjImbTUG2sJPYRK18NfEcncP9EpnkafxBoUj4wyTFL5pbsC0RC1tVXWlEX/YFCgiX0A5VCe1PV19gzJd11PGkuhjUsvKohgVHGZn815TDDDRpHfxn1GmloIth3P9T9+61vgP6JZ6fCgW5EtdGVMJr95HyVqh9FRkwvGYPg5POm4zW4O28BCE4fiaItl7zIcojb4rHwEH+VY/QoZjbRLXxXaHo4gY9fnEfckBI/v4qzmAtPBnjvRaMRYIKRuLYynH3fxRYEGgDvxzF8dlr5J yassir@ubuntu"
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDlWSg6THNMNH/HSq7hsCZRdJx/0LdALLLMm8hNkbrD4La65TqMTWxVTdKq3jBfcByu5WwsWdx9dtzm/Oi+nGBpN6UXCeW64JWVy4VP6YeMpCRsJMgaRUTf6RuReJ93P/KfZZXg/C7/3KcKih5ESctyWWYHfKH9NIQU0zoqO26e+hbnzv2jtc6ObgsESgMpyDsWAcU5RmgnWYvES7dQvEQOjE2Cml9emU7E3h11eIZccUxjGzRvDYhD/SKfliFwhUMulN6sD5VG0ovxPd7LOjOcoMzfzdj4h1DY+Od1mrsTj5tCEUo6dsUzytW40bQWbhDzhyP7A5velD2H83rSwwll yassir@ubuntu"
 }
 
 variable "app_port" {
@@ -26,28 +26,34 @@ variable "app_port" {
 }
 
 variable "private_vpc_app_subnets" {
-  default = []
+  default = ["subnet-0a3d8a788d3411e8a", "subnet-09e8c6aa679ee1e91", "subnet-04b971d848b06af3c"]
 }
 #END : ASG PARAMS
 
 #START : ALB PARAMS
 variable "public_vpc_app_subnets" {
-  default = []
+  default = ["subnet-0f8466b9a2a0a455a", "subnet-07c1255215366e4f8", "subnet-08d14c56271e7c1fd"]
 }
 #END : ALB PARAMS
 
-#END : VPC PARAMS
-
-
-#START : BASTION PARAMS
-variable "key_value" {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAa8s/HyEapMVRbF6i2y0eq433G+lkCNUoSicGiTlVZK6jj2D6nkeApyjMvO+b9d68Gr8sokh/sOiE91suZm33ZN0u1Fho9kbkI5tZmi6yJJlcbha7/Yjg6Hb8ZptV8f6TqML0JkIMp50Z1itE1UPThUzcVyJ5AM2J47k0LseYC640BEzjlJOd45I5LCA7ew7sBmYLzP+yb5Z3EkxvADCQwtlWfnO1goMwnqnG5Zkmt3fKdzCmQ6Ig4Vu54XzbqeHoSyuVp7xRdPq/BO3XnrrWIjBff9amyOajKVzq6XkvEfOp5n8O0Y5X+RiHrPxWDvkGPi27P5IQmiXCCPCUc7dN yassir@ubuntu"
+#START : RDS PARAMS
+variable "db_storage" {
+  default = 20
 }
-variable "key_name" {
-  description = "The name of the keypair"
-  default     = "bastion-key"
+variable "db_instance_type" {
+  default = "db.t2.micro"
 }
-#END : BASTION PARAMS
+variable "db_name" {
+  default = "webapp"
+}
+variable "admin_user" {
+  default = "admin"
+}
+variable "db_password" {
+  default = "admin2020" #TODO: Use secret manager
+}
+#END : END PARAMS
+
 
 
 
