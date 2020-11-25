@@ -19,12 +19,6 @@ module "vpc_database_module" {
   region_name = var.region_name
 }
 
-module "vpc_sysop_module" {
-  source      = "../../modules/vpc"
-  vpc_object  = var.vpc_sysops
-  region_name = var.region_name
-}
-
 module "bastion_module" {
   source           = "../../modules/bastion"
   custom_subnet_id = module.vpc_sysop_module.custom_vpc_public_subnets[0].id
@@ -32,6 +26,7 @@ module "bastion_module" {
   region_name      = var.region_name
   key_name         = var.key_name
   key_value        = var.key_value
+  tag_name         = "app-bastion"
 }
 
 module "vpc_peering_app_database" {
