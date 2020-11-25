@@ -1,12 +1,12 @@
-# terraform {
-#   backend "s3" {
-#     bucket         = "terraform-fitec-example-bucket-state"
-#     key            = "env/dev/terraform.tfstate"
-#     region         = "eu-west-1"
-#     dynamodb_table = "terraform-fitec-example-dynamodb-lock"
-#     encrypt        = true
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket         = "terraform-fitec-example-bucket-state"
+    key            = "env/dev/vpcs/terraform.tfstate"
+    region         = "eu-west-1"
+    dynamodb_table = "terraform-fitec-example-dynamodb-lock"
+    encrypt        = true
+  }
+}
 module "vpc_app_module" {
   source      = "../../modules/vpc"
   vpc_object  = var.vpc_app
