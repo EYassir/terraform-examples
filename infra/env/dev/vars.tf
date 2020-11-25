@@ -53,7 +53,7 @@ variable "key_value" {
 }
 variable "key_name" {
   description = "The name of the keypair"
-  default     = "bastion-key"
+  default     = "app-bastion-key"
 }
 #END : BASTION PARAMS
 
