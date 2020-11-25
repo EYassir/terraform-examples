@@ -1,7 +1,8 @@
 #!/bin/bash
 apt update
-apt install awscli unzip maven -y
+apt install awscli unzip -y
 apt install openjdk-8-jdk -y
+apt install maven -y
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 apt update
