@@ -1,12 +1,3 @@
-data "aws_secretsmanager_secret_version" "git_key" {
-  secret_id = data.aws_secretsmanager_secret.git_secret.id
-}
-data "aws_secretsmanager_secret" "git_secret" {
-  arn = "arn:aws:secretsmanager:eu-west-1:411953124370:secret:git_key_asg-fEeUUf"
-}
-
-#jsondecode(data.aws_secretsmanager_secret_version.db_password.secret_string)["dp_password"]
-
 data "template_file" "user_data" {
   template = file("${path.module}/user_data.sh")
   vars = {

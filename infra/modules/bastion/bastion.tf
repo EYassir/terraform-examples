@@ -20,7 +20,7 @@ resource "aws_instance" "ey_bastion" {
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.ey_bastion_terraform.id]
   tags = {
-    Name = "ey-terraform-bastion"
+    Name = var.tag_name
   }
 }
 

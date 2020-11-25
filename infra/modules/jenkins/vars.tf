@@ -1,7 +1,7 @@
-variable "key_name" {
+variable "jenkins_key_name" {
   description = "The name of the keypair"
 }
-variable "key_value" {
+variable "jenkins_key_value" {
   description = "The value of the keypair"
 }
 variable "custom_subnet_id" {
@@ -10,6 +10,6 @@ variable "custom_subnet_id" {
 variable "custom_vpc_id" {
   description = "The vpc id"
 }
-variable "tag_name"{
-  default="ey-terraform-bastion"
+variable "number_of_jenkins"{
+    description="number of jenkins to create"
 }

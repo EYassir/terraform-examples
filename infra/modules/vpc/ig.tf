@@ -23,5 +23,5 @@ resource "aws_route_table" "ey_public_route" {
 resource "aws_route_table_association" "ey_a" {
   count          = length(var.vpc_object["subnet_public"])
   subnet_id      = aws_subnet.public_0[count.index].id
-  route_table_id = aws_route_table.ey_public_route["${count.index - count.index}"].id
+  route_table_id = aws_route_table.ey_public_route[count.index - count.index].id
 }
