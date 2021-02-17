@@ -18,6 +18,7 @@ variable "vpc_app" {
   }
 }
 
+
 variable "vpc_database" {
   description = "The Database VPC"
   default = {

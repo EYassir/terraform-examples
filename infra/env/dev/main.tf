@@ -21,8 +21,8 @@ module "vpc_database_module" {
 
 module "bastion_module" {
   source           = "../../modules/bastion"
-  custom_subnet_id = module.vpc_sysop_module.custom_vpc_public_subnets[0].id
-  custom_vpc_id    = module.vpc_sysop_module.custom_vpc.id
+  custom_subnet_id = module.vpc_app_module.custom_vpc_public_subnets[0].id
+  custom_vpc_id    = module.vpc_app_module.custom_vpc.id
   region_name      = var.region_name
   key_name         = var.key_name
   key_value        = var.key_value
